@@ -1,0 +1,14 @@
+C:\Users\izakg\source\repos\miniBiblioteka\miniBiblioteka\bin\Debug\net8.0\miniBiblioteka.exe
+C:\Users\izakg\source\repos\miniBiblioteka\miniBiblioteka\bin\Debug\net8.0\miniBiblioteka.deps.json
+C:\Users\izakg\source\repos\miniBiblioteka\miniBiblioteka\bin\Debug\net8.0\miniBiblioteka.runtimeconfig.json
+C:\Users\izakg\source\repos\miniBiblioteka\miniBiblioteka\bin\Debug\net8.0\miniBiblioteka.dll
+C:\Users\izakg\source\repos\miniBiblioteka\miniBiblioteka\bin\Debug\net8.0\miniBiblioteka.pdb
+C:\Users\izakg\source\repos\miniBiblioteka\miniBiblioteka\obj\Debug\net8.0\miniBiblioteka.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\izakg\source\repos\miniBiblioteka\miniBiblioteka\obj\Debug\net8.0\miniBiblioteka.AssemblyInfoInputs.cache
+C:\Users\izakg\source\repos\miniBiblioteka\miniBiblioteka\obj\Debug\net8.0\miniBiblioteka.AssemblyInfo.cs
+C:\Users\izakg\source\repos\miniBiblioteka\miniBiblioteka\obj\Debug\net8.0\miniBiblioteka.csproj.CoreCompileInputs.cache
+C:\Users\izakg\source\repos\miniBiblioteka\miniBiblioteka\obj\Debug\net8.0\miniBiblioteka.dll
+C:\Users\izakg\source\repos\miniBiblioteka\miniBiblioteka\obj\Debug\net8.0\refint\miniBiblioteka.dll
+C:\Users\izakg\source\repos\miniBiblioteka\miniBiblioteka\obj\Debug\net8.0\miniBiblioteka.pdb
+C:\Users\izakg\source\repos\miniBiblioteka\miniBiblioteka\obj\Debug\net8.0\miniBiblioteka.genruntimeconfig.cache
+C:\Users\izakg\source\repos\miniBiblioteka\miniBiblioteka\obj\Debug\net8.0\ref\miniBiblioteka.dll

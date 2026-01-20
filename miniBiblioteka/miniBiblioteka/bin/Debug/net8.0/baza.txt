@@ -1,0 +1,3 @@
+1;Pan Tadeusz;Adam Mićkiewicz;1834;340;Epos
+2;Lalka;Bolesław Prus;1890;650;Powieść
+3;Rok 1984;George Orwell;1949;360;Powieść
