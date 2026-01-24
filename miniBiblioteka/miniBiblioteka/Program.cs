@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -131,7 +130,6 @@ namespace MiniBiblioteka
             Console.WriteLine("------------------------------------------------------------------------------------\n");
         }
 
-
         public void SortBooks(string criterion)
         {
             List<Book> sortedBooks;
@@ -194,9 +192,25 @@ namespace MiniBiblioteka
             string title = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(title)) book.Title = title;
 
-            Console.Write($"Autor ({book.Author}): ");
-            string author = Console.ReadLine();
-            if (!string.IsNullOrWhiteSpace(author)) book.Author = author;
+            while (true)
+            {
+                Console.Write($"Autor ({book.Author}): ");
+                string authorInput = Console.ReadLine();
+
+                if (string.IsNullOrWhiteSpace(authorInput))
+                {
+                    break;
+                }
+                else if (authorInput.Any(char.IsDigit))
+                {
+                    Console.WriteLine("Autor nie może zawierać cyfr! Spróbuj ponownie.");
+                }
+                else
+                {
+                    book.Author = authorInput;
+                    break;
+                }
+            }
 
             Console.Write($"Rok ({book.Year}): ");
             string yearStr = Console.ReadLine();
@@ -219,6 +233,7 @@ namespace MiniBiblioteka
             return books.Count == 0 ? 1 : books.Max(b => b.Id) + 1;
         }
     }
+
     class Program
     {
         static void Main()
@@ -252,8 +267,26 @@ namespace MiniBiblioteka
                         Console.Write("Tytuł: ");
                         string title = Console.ReadLine();
 
-                        Console.Write("Autor: ");
-                        string author = Console.ReadLine();
+                        // 🔒 Walidacja autora - brak cyfr
+                        string author;
+                        while (true)
+                        {
+                            Console.Write("Autor: ");
+                            author = Console.ReadLine();
+
+                            if (string.IsNullOrWhiteSpace(author))
+                            {
+                                Console.WriteLine("Autor nie może być pusty!");
+                            }
+                            else if (author.Any(char.IsDigit))
+                            {
+                                Console.WriteLine("Autor nie może zawierać cyfr! Spróbuj ponownie.");
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
 
                         Console.Write("Rok wydania: ");
                         int.TryParse(Console.ReadLine(), out int year);

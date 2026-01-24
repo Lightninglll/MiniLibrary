@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\izakg\\source\\repos\\miniBiblioteka\\miniBiblioteka\\miniBiblioteka.csproj": {}
+    "D:\\xd\\miniBiblioteka\\miniBiblioteka\\miniBiblioteka.csproj": {}
   },
   "projects": {
-    "C:\\Users\\izakg\\source\\repos\\miniBiblioteka\\miniBiblioteka\\miniBiblioteka.csproj": {
+    "D:\\xd\\miniBiblioteka\\miniBiblioteka\\miniBiblioteka.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\izakg\\source\\repos\\miniBiblioteka\\miniBiblioteka\\miniBiblioteka.csproj",
+        "projectUniqueName": "D:\\xd\\miniBiblioteka\\miniBiblioteka\\miniBiblioteka.csproj",
         "projectName": "miniBiblioteka",
-        "projectPath": "C:\\Users\\izakg\\source\\repos\\miniBiblioteka\\miniBiblioteka\\miniBiblioteka.csproj",
-        "packagesPath": "C:\\Users\\izakg\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\izakg\\source\\repos\\miniBiblioteka\\miniBiblioteka\\obj\\",
+        "projectPath": "D:\\xd\\miniBiblioteka\\miniBiblioteka\\miniBiblioteka.csproj",
+        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+        "outputPath": "D:\\xd\\miniBiblioteka\\miniBiblioteka\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\izakg\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
