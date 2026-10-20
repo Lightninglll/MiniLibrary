@@ -1,0 +1,207 @@
+public class Film {
+    private String tytul;
+    private String rezyser;
+    private int rokProdukcji;
+    private boolean obejrzany;
+
+    public Film(String tytul, String rezyser, int rokProdukcji, boolean obejrzany) {
+        this.tytul = tytul;
+        this.rezyser = rezyser;
+        this.rokProdukcji = rokProdukcji;
+        this.obejrzany = obejrzany;
+    }
+
+    public void obejrzyj() {
+        this.obejrzany = true;
+    }
+
+    @Override
+    public String toString() {
+        return "Film: " + tytul + " | Reżyser: " + rezyser + 
+               " | Rok: " + rokProdukcji + " | Obejrzany: " + (obejrzany ? "Tak" : "Nie");
+    }
+
+    public static void main(String[] args) {
+        Film film1 = new Film("Incepcja", "Christopher Nolan", 2010, false);
+        Film film2 = new Film("Nietykalni", "Olivier Nakache", 2011, true);
+
+        System.out.println(film1);
+        System.out.println(film2);
+
+        System.out.println("\nOglądamy film 1...");
+        film1.obejrzyj();
+        System.out.println(film1);
+    }
+}
+
+2.
+
+public class KalkulatorTemperatur {
+
+    public static double celsiusToFahrenheit(double celsius) {
+        return (celsius * 9.0 / 5.0) + 32;
+    }
+
+    public static double fahrenheitToCelsius(double fahrenheit) {
+        return (fahrenheit - 32) * 5.0 / 9.0;
+    }
+
+    public static void main(String[] args) {
+        double tempC = 25.0;
+        double tempF = 77.0;
+
+        System.out.println(tempC + "°C = " + KalkulatorTemperatur.celsiusToFahrenheit(tempC) + "°F");
+        System.out.println(tempF + "°F = " + KalkulatorTemperatur.fahrenheitToCelsius(tempF) + "°C");
+    }
+}
+
+3.
+
+public class BankAccount {
+    private double balance;
+
+    public BankAccount(double initialBalance) {
+        if (initialBalance >= 0) {
+            this.balance = initialBalance;
+        } else {
+            System.out.println("Początkowe saldo nie może być ujemne. Ustawiono 0.0");
+            this.balance = 0.0;
+        }
+    }
+
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("Wpłacono: " + amount + " zł");
+        } else {
+            System.out.println("Kwota wpłaty musi być większa od 0!");
+        }
+    }
+
+    public void withdraw(double amount) {
+        if (amount <= 0) {
+            System.out.println("Kwota wypłaty musi być większa od 0!");
+        } else if (amount > balance) {
+            System.out.println("Brak wystarczających środków na koncie!");
+        } else {
+            balance -= amount;
+            System.out.println("Wypłacono: " + amount + " zł");
+        }
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public static void main(String[] args) {
+        BankAccount account = new BankAccount(500.0);
+        System.out.println("Aktualne saldo: " + account.getBalance() + " zł");
+
+        account.deposit(200.0);
+        account.withdraw(1000.0); // Próba wypłaty zbyt dużej kwoty
+        account.withdraw(300.0);
+
+        System.out.println("Końcowe saldo: " + account.getBalance() + " zł");
+    }
+}
+
+4.
+
+class Student {
+    private String imie;
+
+    public Student(String imie) {
+        this.imie = imie;
+        StudentGroup.incrementStudentCount(); // Zwiększamy licznik przy tworzeniu obiektu
+    }
+}
+
+public class StudentGroup {
+    private static int studentCount = 0;
+
+    public static void incrementStudentCount() {
+        studentCount++;
+    }
+
+    public static int getStudentCount() {
+        return studentCount;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Liczba studentów na początku: " + StudentGroup.getStudentCount());
+
+        Student s1 = new Student("Anna");
+        Student s2 = new Student("Piotr");
+        Student s3 = new Student("Kasia");
+
+        System.out.println("Liczba utworzonych obiektów Student: " + StudentGroup.getStudentCount());
+    }
+}
+
+5.
+
+public class Rectangle {
+    private double width;
+    private double height;
+
+    public Rectangle(double width, double height) {
+        this.width = width;
+        this.height = height;
+    }
+
+    public double area() {
+        return this.width * this.height;
+    }
+
+    public double perimeter() {
+        return 2 * (this.width + this.height);
+    }
+
+    public static void main(String[] args) {
+        Rectangle rect = new Rectangle(5.0, 4.0);
+
+        System.out.println("Pole prostokąta: " + rect.area());
+        System.out.println("Obwód prostokąta: " + rect.perimeter());
+    }
+}
+
+6.
+
+public class KalkulatorLiczb {
+
+    // Metoda przyjmująca dowolną liczbę argumentów całkowitych (varargs)
+    public static void printNumbers(int... numbers) {
+        System.out.print("Przekazane liczby: ");
+        if (numbers.length == 0) {
+            System.out.println("(brak argumentów - pusta tablica)");
+            return;
+        }
+
+        for (int n : numbers) {
+            System.out.print(n + " ");
+        }
+        System.out.println();
+    }
+
+    // Dodatkowy przykład: obliczanie sumy dowolnej liczby elementów
+    public static int sum(int... numbers) {
+        int suma = 0;
+        for (int n : numbers) {
+            suma += n;
+        }
+        return suma;
+    }
+
+    public static void main(String[] args) {
+        // Wywołania z różną liczbą argumentów
+        printNumbers(1, 2, 3);
+        printNumbers(10, 20);
+        printNumbers(); // Wywołanie bez argumentów (pusta tablica)
+
+        System.out.println("Suma (1, 2, 3): " + sum(1, 2, 3));
+        System.out.println("Suma (10, 20, 30, 40): " + sum(10, 20, 30, 40));
+    }
+}
+
+
+
