@@ -1,0 +1,128 @@
+// Zadanie 1 i Zadanie 2: Klasa Product
+class Product {
+    // Pola instancyjne (dla każdego obiektu osobne)
+    private String name;
+    private double price;
+    private String category;
+    private boolean available;
+
+    // Pole statyczne (wspólne dla całej klasy)
+    public static int productCount = 0;
+
+    // Konstruktor
+    public Product(String name, double price, String category, boolean available) {
+        this.name = name;
+        this.price = price;
+        this.category = category;
+        this.available = available;
+        
+        // Zwiększamy statyczny licznik przy tworzeniu każdego obiektu
+        productCount++;
+    }
+
+    // Metoda wypisująca informacje o produkcie
+    public void printInfo() {
+        System.out.println("Produkt: " + name + " | Cena: " + price + " zł | Kategoria: " + category + " | Dostępny: " + (available ? "Tak" : "Nie"));
+    }
+}
+
+// Zadanie 3: Klasa LibraryMember
+class LibraryMember {
+    // Pole final (nie można go zmienić po przypisaniu wartości)
+    private final String memberId;
+    private String name;
+
+    public LibraryMember(String memberId, String name) {
+        this.memberId = memberId;
+        this.name = name;
+    }
+
+    public void printMemberInfo() {
+        System.out.println("Czytelnik: " + name + " | ID: " + memberId);
+    }
+}
+
+// Zadanie 4: Klasa VisitCounter
+class VisitCounter {
+    // Pole klasy (zachowuje swój stan między wywołaniami metod na tym obiekcie)
+    private int fieldCounter = 0;
+
+    public void visit() {
+        // Zmienna lokalna (tworzona i niszczona przy każdym wywołaniu metody)
+        int localCounter = 0;
+
+        fieldCounter++;
+        localCounter++;
+
+        System.out.println("Zmienna lokalna: " + localCounter + " | Pole klasy (fieldCounter): " + fieldCounter);
+    }
+}
+
+// Zadanie 5: Klasa ScoreBoard
+class ScoreBoard {
+    // Pola instancyjne opisu wyników jednego meczu
+    private String teamA;
+    private String teamB;
+    private int scoreA;
+    private int scoreB;
+
+    // Pole statyczne liczące wszystkie rozegrane mecze
+    public static int totalMatches = 0;
+
+    public ScoreBoard(String teamA, String teamB, int scoreA, int scoreB) {
+        this.teamA = teamA;
+        this.teamB = teamB;
+        this.scoreA = scoreA;
+        this.scoreB = scoreB;
+        
+        totalMatches++;
+    }
+
+    public void printMatchResult() {
+        System.out.println("Mecz: " + teamA + " " + scoreA + " : " + scoreB + " " + teamB);
+    }
+}
+
+// Zadanie 6: Krótki eksperyment w metodzie main
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("=== TEST ZADANIA 1 i 2 ===");
+        Product p1 = new Product("Laptop", 3500.0, "Elektronika", true);
+        Product p2 = new Product("Myszka", 80.0, "Elektronika", false);
+
+        p1.printInfo();
+        p2.printInfo();
+        System.out.println("Łączna liczba utworzonych produktów (pole statyczne): " + Product.productCount);
+
+
+        System.out.println("\n=== TEST ZADANIA 3 ===");
+        LibraryMember member = new LibraryMember("LIB-12345", "Jan Kowalski");
+        member.printMemberInfo();
+
+
+        System.out.println("\n=== TEST ZADANIA 4 ===");
+        VisitCounter counter = new VisitCounter();
+        System.out.println("Wywołanie 1:");
+        counter.visit();
+        System.out.println("Wywołanie 2:");
+        counter.visit();
+        System.out.println("Wywołanie 3:");
+        counter.visit();
+
+
+        System.out.println("\n=== TEST ZADANIA 5 i 6 ===");
+        // Tworzymy kilka obiektów tej samej klasy (ScoreBoard)
+        ScoreBoard match1 = new ScoreBoard("Real Madryt", "Barcelona", 2, 1);
+        ScoreBoard match2 = new ScoreBoard("Arsenal", "Chelsea", 3, 0);
+
+        // Każdy obiekt ma własny stan (własny wynik i drużyny)
+        System.out.print("Mecz 1 (własny stan): ");
+        match1.printMatchResult();
+
+        System.out.print("Mecz 2 (własny stan): ");
+        match2.printMatchResult();
+
+        // Obydwa obiekty współdzielą jedno pole statyczne (totalMatches)
+        System.out.println("Wszystkie rozegrane mecze (współdzielone pole statyczne): " + ScoreBoard.totalMatches);
+    }
+}
