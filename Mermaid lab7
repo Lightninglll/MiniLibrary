@@ -1,0 +1,37 @@
+classDiagram
+    class Employee {
+        #String name
+        #double baseSalary
+        +getDescription() String
+        +calculateBonus() double
+    }
+
+    class Manager {
+        #int teamSize
+        +getDescription() String  %% przesłaniana (@Override)
+        +calculateBonus() double  %% przesłaniana (@Override)
+    }
+
+    class Director {
+        -String department
+        -double annualBudget
+        +getDescription() String  %% przesłaniana (@Override)
+        +calculateBonus() double  %% przesłaniana (@Override)
+        +approveBudget() void
+    }
+
+    class Contractor {
+        -String name
+        -ContractDetails contractDetails
+        +getDescription() String
+    }
+
+    class ContractDetails {
+        -String companyName
+        -double hourlyRate
+        +getContractInfo() String
+    }
+
+    Employee <|-- Manager : dziedziczy
+    Manager <|-- Director : dziedziczy
+    Contractor *-- ContractDetails : kompozycja
