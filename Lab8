@@ -1,0 +1,149 @@
+// Punkt 1 i 2: Klasa bazowa Employee
+class Employee {
+    protected String name;
+    protected double baseSalary;
+
+    public Employee(String name, double baseSalary) {
+        this.name = name;
+        this.baseSalary = baseSalary;
+    }
+
+    public String getDescription() {
+        return "Pracownik: " + name + ", pensja bazowa: " + baseSalary + " PLN";
+    }
+
+    public double calculateBonus() {
+        return baseSalary * 0.10; // Podstawowa premia: 10%
+    }
+}
+
+// Punkt 1 i 2: Klasa Manager dziedzicząca po Employee
+class Manager extends Employee {
+    protected int teamSize;
+
+    public Manager(String name, double baseSalary, int teamSize) {
+        super(name, baseSalary);
+        this.teamSize = teamSize;
+    }
+
+    @Override
+    public String getDescription() {
+        return "Manager: " + name + ", pensja bazowa: " + baseSalary + " PLN, wielkość zespołu: " + teamSize;
+    }
+
+    @Override
+    public double calculateBonus() {
+        // Premia 15% + 100 PLN za każdego członka zespołu
+        return (baseSalary * 0.15) + (teamSize * 100);
+    }
+}
+
+// Punkt 1 i 2: Klasa Director dziedzicząca po Manager
+class Director extends Manager {
+    private String department;
+    private double annualBudget;
+
+    public Director(String name, double baseSalary, int teamSize, String department, double annualBudget) {
+        super(name, baseSalary, teamSize);
+        this.department = department;
+        this.annualBudget = annualBudget;
+    }
+
+    @Override
+    public String getDescription() {
+        return "Dyrektor: " + name + " (Dział: " + department + "), pensja bazowa: " + baseSalary + " PLN, budżet: " + annualBudget + " PLN";
+    }
+
+    @Override
+    public double calculateBonus() {
+        // Premia 25% + 500 PLN stałego dodatku dyrektorskiego
+        return (baseSalary * 0.25) + 500;
+    }
+
+    public void approveBudget() {
+        System.out.println("Dyrektor " + name + " zatwierdza budżet działu " + department + ".");
+    }
+}
+
+// Punkt 5: Klasa Contractor (zastosowana kompozycja przez umowę B2B / rolę, a nie dziedziczenie po Employee)
+class ContractDetails {
+    private String companyName;
+    private double hourlyRate;
+
+    public ContractDetails(String companyName, double hourlyRate) {
+        this.companyName = companyName;
+        this.hourlyRate = hourlyRate;
+    }
+
+    public String getContractInfo() {
+        return "Firma: " + companyName + ", stawka: " + hourlyRate + " PLN/h";
+    }
+}
+
+class Contractor {
+    private String name;
+    private ContractDetails contractDetails; // Kompozycja (obiekt zawiera inny obiekt)
+
+    public Contractor(String name, ContractDetails contractDetails) {
+        this.name = name;
+        this.contractDetails = contractDetails;
+    }
+
+    public String getDescription() {
+        return "Kontraktor B2B: " + name + " (" + contractDetails.getContractInfo() + ")";
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        double commonBaseSalary = 10000.0;
+
+        Employee emp = new Employee("Jan Kowalski", commonBaseSalary);
+        Manager mgr = new Manager("Anna Nowak", commonBaseSalary, 5);
+        Director dir = new Director("Piotr Wiśniewski", commonBaseSalary, 20, "IT", 500000.0);
+
+        // Punkt 2: Porównanie premii dla tej samej pensji bazowej (10 000 PLN)
+        System.out.println("=== PORÓWNANIE PREMII (baza: " + commonBaseSalary + " PLN) ===");
+        System.out.println("Premia Employee: " + emp.calculateBonus() + " PLN");
+        System.out.println("Premia Manager:  " + mgr.calculateBonus() + " PLN");
+        System.out.println("Premia Director: " + dir.calculateBonus() + " PLN\n");
+
+        // Punkt 3: Demonstracja polimorfizmu
+        System.out.println("=== ZESPÓŁ (POLIMORFIZM) ===");
+        Employee[] team = {emp, mgr, dir};
+        printTeam(team);
+
+        // Punkt 4: Bezpieczne rzutowanie (instanceof) vs ClassCastException
+        System.out.println("\n=== RZUTOWANIE ===");
+        Employee mysteryEmployee = new Manager("Kasia Zielińska", 12000.0, 4);
+
+        // Bezpieczne rzutowanie z pattern matchingiem (Java 16+)
+        if (mysteryEmployee instanceof Director d) {
+            d.approveBudget();
+        } else {
+            System.out.println("Bezpieczne sprawdzenie: ten obiekt nie jest Dyrektorem, nie rzutuję.");
+        }
+
+        // Błędne rzutowanie prowadzące do ClassCastException
+        try {
+            Director forcedDirector = (Director) mysteryEmployee; // Próba rzutowania Managera na Directora
+            forcedDirector.approveBudget();
+        } catch (ClassCastException e) {
+            System.out.println("Złapano wyjątek ClassCastException: " + e.getMessage());
+        }
+
+        // Punkt 5: Użycie klasy Contractor
+        System.out.println("\n=== KONTRAKTOR ===");
+        ContractDetails b2b = new ContractDetails("DevCode Sp. z o.o.", 150.0);
+        Contractor contractor = new Contractor("Marek Kaczmarek", b2b);
+        System.out.println(contractor.getDescription());
+    }
+
+    // Punkt 3: Metoda przyjmująca tablicę typu bazowego
+    public static void printTeam(Employee[] team) {
+        for (Employee member : team) {
+            // Wywołuje wersję metody zgodną z rzeczywistym typem obiektu w pamięci
+            System.out.println(member.getDescription() + " | Premia: " + member.calculateBonus() + " PLN");
+        }
+    }
+}
