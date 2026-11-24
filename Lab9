@@ -1,0 +1,385 @@
+zad1
+interface Payable {
+    void pay(double amount);
+}
+
+class CashPayment implements Payable {
+    @Override
+    public void pay(double amount) {
+        System.out.println("Zapłacono gotówką: " + amount + " PLN");
+    }
+}
+
+class CardPayment implements Payable {
+    @Override
+    public void pay(double amount) {
+        System.out.println("Zapłacono kartą: " + amount + " PLN");
+    }
+}
+
+zad2
+interface Reportable {
+    String generateReport();
+}
+
+class Invoice implements Reportable {
+    private String invoiceNumber;
+    private double total;
+
+    public Invoice(String invoiceNumber, double total) {
+        this.invoiceNumber = invoiceNumber;
+        this.total = total;
+    }
+
+    @Override
+    public String generateReport() {
+        return "Raport Faktury [" + invoiceNumber + "]: Kwota " + total + " PLN";
+    }
+}
+
+class Employee implements Reportable {
+    private String name;
+    private int hoursWorked;
+
+    public Employee(String name, int hoursWorked) {
+        this.name = name;
+        this.hoursWorked = hoursWorked;
+    }
+
+    @Override
+    public String generateReport() {
+        return "Raport Pracownika [" + name + "]: Przepracowano " + hoursWorked + " godz.";
+    }
+}
+
+zad3
+abstract class Vehicle {
+    protected String brand;
+    protected int year;
+
+    public Vehicle(String brand, int year) {
+        this.brand = brand;
+        this.year = year;
+    }
+
+    public abstract void start();
+}
+
+class Car extends Vehicle {
+    public Car(String brand, int year) {
+        super(brand, year);
+    }
+
+    @Override
+    public void start() {
+        System.out.println("Samochód " + brand + " (" + year + ") odpala silnik kluczykiem.");
+    }
+}
+
+class Bike extends Vehicle {
+    public Bike(String brand, int year) {
+        super(brand, year);
+    }
+
+    @Override
+    public void start() {
+        System.out.println("Rower " + brand + " (" + year + ") rusza po naciśnięciu na pedały.");
+    }
+}
+
+zad4
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainTask4 {
+    public static void main(String[] args) {
+        List<Payable> payments = new ArrayList<>();
+        payments.add(new CashPayment());
+        payments.add(new CardPayment());
+
+        for (Payable payment : payments) {
+            payment.pay(150.0);
+        }
+    }
+}
+
+zad5
+interface Logger {
+    void log(String message);
+
+    default void logError(String error) {
+        log("[ERROR]: " + error);
+    }
+
+    static void printSystemInfo() {
+        System.out.println("System logowania v1.0");
+    }
+}
+
+class ConsoleLogger implements Logger {
+    @Override
+    public void log(String message) {
+        System.out.println(message);
+    }
+}
+
+public class MainTask5 {
+    public static void main(String[] args) {
+        Logger.printSystemInfo(); // Wywołanie metody statycznej
+        Logger logger = new ConsoleLogger();
+        logger.logError("Brak połączenia z bazą danych."); // Wywołanie metody domyślnej
+    }
+}
+
+zad6
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+interface Shape {
+    double area();
+    double perimeter();
+    void describe();
+}
+
+abstract class AbstractShape implements Shape, Comparable<Shape> {
+    protected String name;
+
+    public AbstractShape(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public void describe() {
+        System.out.printf("Figura: %s | Pole: %.2f | Obwód: %.2f%n", name, area(), perimeter());
+    }
+
+    @Override
+    public int compareTo(Shape other) {
+        return Double.compare(this.area(), other.area());
+    }
+}
+
+class Circle extends AbstractShape {
+    private double radius;
+
+    public Circle(double radius) {
+        super("Koło");
+        this.radius = radius;
+    }
+
+    @Override
+    public double area() {
+        return Math.PI * radius * radius;
+    }
+
+    @Override
+    public double perimeter() {
+        return 2 * Math.PI * radius;
+    }
+}
+
+class Rectangle extends AbstractShape {
+    private double width;
+    private double height;
+
+    public Rectangle(double width, double height) {
+        super("Prostokąt");
+        this.width = width;
+        this.height = height;
+    }
+
+    @Override
+    public double area() {
+        return width * height;
+    }
+
+    @Override
+    public double perimeter() {
+        return 2 * (width + height);
+    }
+}
+
+public class MainTask7 {
+    public static void main(String[] args) {
+        List<AbstractShape> shapes = new ArrayList<>();
+        shapes.add(new Circle(5.0));       // Pole ~ 78.54
+        shapes.add(new Rectangle(4.0, 5.0)); // Pole = 20.00
+        shapes.add(new Circle(2.0));       // Pole ~ 12.57
+
+        Collections.sort(shapes);
+
+        for (AbstractShape s : shapes) {
+            s.describe();
+        }
+    }
+}
+
+zad7
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+interface Shape {
+    double area();
+    double perimeter();
+    void describe();
+}
+
+abstract class AbstractShape implements Shape, Comparable<Shape> {
+    protected String name;
+
+    public AbstractShape(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public void describe() {
+        System.out.printf("Figura: %s | Pole: %.2f | Obwód: %.2f%n", name, area(), perimeter());
+    }
+
+    @Override
+    public int compareTo(Shape other) {
+        return Double.compare(this.area(), other.area());
+    }
+}
+
+class Circle extends AbstractShape {
+    private double radius;
+
+    public Circle(double radius) {
+        super("Koło");
+        this.radius = radius;
+    }
+
+    @Override
+    public double area() {
+        return Math.PI * radius * radius;
+    }
+
+    @Override
+    public double perimeter() {
+        return 2 * Math.PI * radius;
+    }
+}
+
+class Rectangle extends AbstractShape {
+    private double width;
+    private double height;
+
+    public Rectangle(double width, double height) {
+        super("Prostokąt");
+        this.width = width;
+        this.height = height;
+    }
+
+    @Override
+    public double area() {
+        return width * height;
+    }
+
+    @Override
+    public double perimeter() {
+        return 2 * (width + height);
+    }
+}
+
+public class MainTask7 {
+    public static void main(String[] args) {
+        List<AbstractShape> shapes = new ArrayList<>();
+        shapes.add(new Circle(5.0));       // Pole ~ 78.54
+        shapes.add(new Rectangle(4.0, 5.0)); // Pole = 20.00
+        shapes.add(new Circle(2.0));       // Pole ~ 12.57
+
+        Collections.sort(shapes);
+
+        for (AbstractShape s : shapes) {
+            s.describe();
+        }
+    }
+}
+
+zad8
+interface Printer {
+    default void status() {
+        System.out.println("Drukarka: Gotowa do druku.");
+    }
+}
+
+interface Scanner {
+    default void status() {
+        System.out.println("Skaner: Gotowy do skanowania.");
+    }
+}
+
+class MultiFunctionDevice implements Printer, Scanner {
+    @Override
+    public void status() {
+        Printer.super.status();
+        Scanner.super.status();
+    }
+}
+
+public class MainTask8 {
+    public static void main(String[] args) {
+        MultiFunctionDevice mfd = new MultiFunctionDevice();
+        mfd.status();
+    }
+}
+
+zad9
+abstract class Beverage {
+    public final void prepare() {
+        boilWater();
+        brew();
+        pourIntoCup();
+        addExtras();
+    }
+
+    private void boilWater() {
+        System.out.println("Gotowanie wody...");
+    }
+
+    private void pourIntoCup() {
+        System.out.println("Nalewanie do filiżanki...");
+    }
+
+    protected abstract void brew();
+    protected abstract void addExtras();
+}
+
+class Tea extends Beverage {
+    @Override
+    protected void brew() {
+        System.out.println("Parzenie liści herbaty...");
+    }
+
+    @Override
+    protected void addExtras() {
+        System.out.println("Dodawanie cytryny i miodu.");
+    }
+}
+
+class Coffee extends Beverage {
+    @Override
+    protected void brew() {
+        System.out.println("Parzenie mielonej kawy pod ciśnieniem...");
+    }
+
+    @Override
+    protected void addExtras() {
+        System.out.println("Dodawanie mleka i cukru.");
+    }
+}
+
+public class MainTask9 {
+    public static void main(String[] args) {
+        Beverage tea = new Tea();
+        tea.prepare();
+
+        System.out.println("---");
+
+        Beverage coffee = new Coffee();
+        coffee.prepare();
+    }
+}
